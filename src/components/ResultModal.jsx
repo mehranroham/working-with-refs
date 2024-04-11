@@ -1,7 +1,7 @@
 import { forwardRef, useImperativeHandle, useRef } from 'react';
 
 const ResultModal = forwardRef(function ResultModal(
-  { result, targetTime, setTimerStarted },
+  { result, targetTime, timerRemaining, setTimerRemaining },
   ref
 ) {
   const dialog = useRef();
@@ -15,7 +15,7 @@ const ResultModal = forwardRef(function ResultModal(
   });
 
   const handleClose = () => {
-    setTimerStarted(false);
+    setTimerRemaining(targetTime * 1000);
   };
 
   return (
@@ -25,7 +25,8 @@ const ResultModal = forwardRef(function ResultModal(
         the target time was <strong>{targetTime} seconds.</strong>
       </p>
       <p>
-        you stopped the timer with <strong>X seconds left</strong>
+        you stopped the timer with{' '}
+        <strong>{timerRemaining / 1000} seconds left</strong>
       </p>
       <form method='dialog'>
         <button onClick={handleClose}>Close</button>
